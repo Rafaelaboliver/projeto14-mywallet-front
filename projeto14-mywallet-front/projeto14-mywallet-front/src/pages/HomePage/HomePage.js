@@ -3,17 +3,8 @@ import { Bottom, CheckIn, CheckOut, DataContainer, HomeContainer, Title } from "
 
 
 
-export default function HomePage () {
-    const navigate = Navigate();
-
-    function goCkeckIn () {
-    navigate('/nova-entrada');
-    };
-
-    function goCkeckOut () {
-        navigate('/nova-saida');
-    }
-
+export default function HomePage() {
+    
     return (
         <HomeContainer>
             <Title>
@@ -23,19 +14,19 @@ export default function HomePage () {
 
             <DataContainer>
                 <p>
-                Não há registros de entrada ou saída
+                    Não há registros de entrada ou saída
                 </p>
             </DataContainer>
 
             <Bottom>
-                <CheckIn onClick={goCkeckIn()}>
-                <ion-icon name="add-circle-outline"></ion-icon>
-                <h3>Nova entrada</h3>
+                <CheckIn>
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                    <h3>Nova entrada</h3>
                 </CheckIn>
 
-                <CheckOut onClick={goCkeckOut()}>
-                <ion-icon name="remove-circle-outline"></ion-icon>
-                <h3>Nova saída</h3>
+                <CheckOut >
+                    <ion-icon name="remove-circle-outline"></ion-icon>
+                    <h3>Nova saída</h3>
                 </CheckOut>
             </Bottom>
         </HomeContainer>
