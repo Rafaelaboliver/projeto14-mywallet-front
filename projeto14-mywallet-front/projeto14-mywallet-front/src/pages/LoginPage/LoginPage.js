@@ -41,7 +41,7 @@ export default function LoginPage () {
             </DataContainer>
 
             <TextContainer>
-                <Link to='/sign-up'>
+                <Link to='/cadastro'>
                     <h3>Primeira vez? Cadastre-se!</h3>
                 </Link>
             </TextContainer>
