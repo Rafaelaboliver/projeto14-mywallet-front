@@ -27,35 +27,71 @@ export const DataContainer = styled.div`
 width: 305px;
 margin: auto;
 display: flex;
-margin: auto;
+align-items: center;
+margin: 30px 0 25px;
 flex-direction: column;
 input{
-    width: 303px;
-    height: 45px;
-    margin-top: 15px;
-    border-radius: 5px;
-    border: 1px solid #d4d4d4;
-    background-color: #fff;
-    font-size: 14px;
-    font-family: Raleway;
-    ::placeholder{
-        color: #7e7e7e;
-        font-size: 14px;
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+    width: 326px;
+    height: 58px;
+    margin-bottom: 13px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;  
+    pointer-events: ${(props) => (props.disabled ? "none" : "all")};
+    background-color: ${(props) => (props.disabled ? "#F2F2F2" : "#FFFFFF")};
+    color: ${(props) => (props.disabled ? "#AFAFAF" : "#666666")};
+    &::placeholder {
+        font-family: "Raleway";
+        font-style: normal;
         font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+        color: #000000;
     }
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
 }
 button{
-    width: 303px;
-    height:45px;
-    background-color: #ff4791;
-    margin: 20px auto 0px;
+    width: 326px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
     border-radius: 5px;
-    border-style: none;
-    color: #fff;
-    font-family: Raleway;
-    font-weight: 700;
-    font-size: 18px;
+    cursor: pointer;
+    pointer-events: ${(props) => (props.disabled ? "none" : "all")};
+    opacity: ${(props) => (props.disabled ? 0.7 : 1)};
+    font-size: 20px;
+    line-height: 26px;
     text-align: center;
+    background: #a328d6;
+    color: #ffffff;
+    &:hover {
+        background: #9c25cc;
+    }
+    s &:active {
+        background: #9522c2;
+    }
+    &:focus {
+        outline: none;
+    }
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #ffffff;
 }
 `
 
@@ -63,15 +99,21 @@ export const TextContainer = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-margin-bottom: 130px;
+margin-top: 32px;
 h3{
     font-size: 14px;
-    font-family: Raleway;
-    font-weight: 400;
-    align-items: center;
-    color: #fff;
+    line-height: 17px;
+    text-decoration: none;
+    color: #ffffff;
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
 }
 a{
         color: #fff;
     }
 `
+
+
+  
