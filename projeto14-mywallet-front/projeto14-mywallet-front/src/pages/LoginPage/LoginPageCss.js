@@ -100,7 +100,7 @@ display: flex;
 display: flex;
 justify-content: center;
 align-items: center;
-margin-top: 32px;
+margin-top: 30px;
 h3{
     font-size: 14px;
     line-height: 17px;
