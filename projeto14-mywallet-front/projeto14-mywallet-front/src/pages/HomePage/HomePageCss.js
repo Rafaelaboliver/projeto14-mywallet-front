@@ -144,3 +144,49 @@ ion-icon{
     margin-left: 10px;
 }
 `
+export  const DescriptionContainer = styled.div`
+width: 326px;
+display: flex;
+flex-direction: raw;
+justify-content: space-between;
+padding: 20px 15px 0px;
+`
+
+export const Day = styled.div`
+color: #C6C6C6;
+p{
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    
+}
+`
+export const Item = styled.div`
+color: #000;
+p{
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+`
+export const Price = styled.div`
+color: ${(props) => (props.price > 0? '#03AC00': '#C70000')};
+p{
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+`
+export const TotalContainer = styled.div`
+width: 326px;
+display: flex;
+flex-direction: raw;
+text-align: center;
+justify-content: center;
+`
