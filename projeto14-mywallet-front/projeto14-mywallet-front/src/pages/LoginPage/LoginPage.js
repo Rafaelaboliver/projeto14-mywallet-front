@@ -1,16 +1,36 @@
 import { LoginContainer, Title, DataContainer, TextContainer } from "./LoginPageCss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import apiAuth from "../../services/apiAuth";
+
 
 export default function LoginPage () {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
+
+    const [form, setForm] = useState({ email: "", password: "" });
 
     function loginMyWallet(e) {
         e.preventDefault();
-        navigate('/home');
+
+    apiAuth
+      .singIn(form)
+      .then((res) => {
+        console.log(res.data);
+        setUser(res.data);
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
     }
+
+    function handleForm(e) {
+        setForm({ ...form, [e.target.id]: e.target.value });
+      }
+
+  
 
     return (
         <LoginContainer>
@@ -21,18 +41,18 @@ export default function LoginPage () {
                     <input
                         id='email'
                         type='email'
-                        value={email}
+                        value={form.email}
                         placeholder='E-mail'
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={handleForm}
                         required
                     />
 
                     <input
                         id='password'
                         type='password'
-                        value={password}
+                        value={form.password}
                         placeholder='Senha'
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={handleForm}
                         required
                     />
 

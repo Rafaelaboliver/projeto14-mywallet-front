@@ -7,8 +7,14 @@ function singUp(body) {
   return axios.post(`${BASE_URL}/singUp`, body);
 }
 
-const apiAuth = {
-  singUp,
-};
+function singIn(body) {
+    return axios.post(`${BASE_URL}/singIn`, body);
+  
+  }
 
+  const apiAuth = {
+    singUp, 
+    singIn
+  };
 export default apiAuth;
+
