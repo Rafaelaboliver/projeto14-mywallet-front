@@ -1,11 +1,33 @@
 import { Link } from "react-router-dom";
 import { Bottom, CheckIn, CheckOut, DataContainer, HomeContainer, Title, DescriptionContainer, Day, Item, Price, TotalContainer } from "./HomePageCss";
-import { useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../context/UserContext";
+import { apiWallet } from "../../services/apiWallet";
 
 
 export default function HomePage() {
-    const [initialMessage, setInitialMessage] = useState([]);
+    const { user } = useContext(UserContext);
+    const [userWallet, setUserWallet] = useState({
+        coming: [],
+        balance: 0,
+    });
+
+    function getWalletList() {
+        apiWallet
+            .getWallet(user.token)
+            .then((res) => {
+                console.log("Resposta do Servidor:", res.data);
+                setUserWallet(res.data);
+            })
+            .catch((err) => {
+                alert(err.response.data.message);
+            });
+    }
+
+    useEffect(getWalletList, [user.token]);
+    console.log(userWallet.coming);
+
+    let userComing = userWallet.coming;
 
     return (
         <HomeContainer>
@@ -18,22 +40,22 @@ export default function HomePage() {
             </Title>
 
             <DataContainer>
-                {initialMessage.length === 0 ? (
+                {userWallet.length === 0 ? (
                     <p>
                         Não há registros de entrada ou saída
                     </p>
                 ) : (
                     //aqui iriei fazer o map da variável initialMessage (setInitialMessage vai receber os dados do servidor):
                     <>
-                    <DescriptionContainer>
-                        <Day>30/11</Day>
-                        <Item>Salário</Item>
-                        <Price>10000,00</Price>
-                    </DescriptionContainer>
+                        <DescriptionContainer>
+                            <Day>30/11</Day>
+                            <Item>Salário</Item>
+                            <Price>10000,00</Price>
+                        </DescriptionContainer>
 
-                    <TotalContainer>
-
-                    </TotalContainer>
+                        <TotalContainer>
+                            {userComing}
+                        </TotalContainer>
                     </>
                 )
                 }
