@@ -1,18 +1,48 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {SignUpContainer, Title, DataContainer, TextContainer} from './SignUpPageCss';
+import apiAuth from '../../services/apiAuth';
 
 export default function SignUpPage() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
+
+    const [form, setForm] = useState({
+        email: '',
+        password: '',
+        name: '',
+        confirmPassword: ''
+    });
+    
+    function handleForm(e) {
+        setForm({ ...form, [e.target.id]: e.target.value });
+      }
+    
 
     function createAccount(e) {
         e.preventDefault();
-        navigate('/');
+        if (form.password !== form.confirmPassword) {
+            alert("Passwords do not match");
+            return;
+          }
+      
+          //body without "confirmPassword"
+          const body = {
+            name: form.name,
+            email: form.email,
+            password: form.password,
+          };
+      
+          apiAuth
+            .singUp(body)
+            .then((res) => {
+              console.log(res.data);
+              navigate("/");
+            })
+            .catch((err) => {
+              console.log(err.response.data);
+            });
     }
+
     return (
         <SignUpContainer>
 
@@ -25,36 +55,36 @@ export default function SignUpPage() {
                     <input
                         id='name'
                         type='text'
-                        value={name}
+                        value={form.name}
                         placeholder='Nome'
-                        onChange={e => setName(e.target.value)}
+                        onChange={handleForm}
                         required
                     />
 
                     <input
                         id='email'
                         type='email'
-                        value={email}
+                        value={form.email}
                         placeholder='E-mail'
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={handleForm}
                         required
                     />
 
                     <input
                         id='password'
                         type='password'
-                        value={password}
+                        value={form.password}
                         placeholder='Senha'
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={handleForm}
                         required
                     />
 
                     <input
                         id='confirmPassword'
                         type='password'
-                        value={confirmPassword}
+                        value={form.confirmPassword}
                         placeholder='Confirme a senha'
-                        onChange={e => setConfirmPassword(e.target.value)}
+                        onChange={handleForm}
                         required
                     />
 
