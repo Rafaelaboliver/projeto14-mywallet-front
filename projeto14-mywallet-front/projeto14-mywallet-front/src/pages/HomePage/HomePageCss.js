@@ -173,8 +173,8 @@ p{
     line-height: 19px;
 }
 `
-export const Price = styled.div`
-color: ${(props) => (props.price > 0? '#03AC00': '#C70000')};
+export const Value = styled.div`
+color: ${(props) => (props.type === "in" ? '#03AC00': '#C70000')};
 p{
     font-family: "Raleway";
     font-style: normal;

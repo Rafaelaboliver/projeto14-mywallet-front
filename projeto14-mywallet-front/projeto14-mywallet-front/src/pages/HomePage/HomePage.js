@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Bottom, CheckIn, CheckOut, DataContainer, HomeContainer, Title, DescriptionContainer, Day, Item, Price, TotalContainer } from "./HomePageCss";
+import { Bottom, CheckIn, CheckOut, DataContainer, HomeContainer, Title, DescriptionContainer, Day, Item, Value, TotalContainer } from "./HomePageCss";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { apiWallet } from "../../services/apiWallet";
@@ -27,7 +27,7 @@ export default function HomePage() {
     useEffect(getWalletList, [user.token]);
     console.log(userWallet.coming);
 
-    let userComing = userWallet.coming;
+    //let userComing = userWallet.coming;
 
     return (
         <HomeContainer>
@@ -40,21 +40,25 @@ export default function HomePage() {
             </Title>
 
             <DataContainer>
-                {userWallet.length === 0 ? (
+                {userWallet.coming.length === 0 ? (
                     <p>
                         Não há registros de entrada ou saída
                     </p>
                 ) : (
                     //aqui iriei fazer o map da variável initialMessage (setInitialMessage vai receber os dados do servidor):
                     <>
-                        <DescriptionContainer>
-                            <Day>30/11</Day>
-                            <Item>Salário</Item>
-                            <Price>10000,00</Price>
-                        </DescriptionContainer>
+
+                        {userWallet.coming.map((item, index) => (
+                            <DescriptionContainer key={index} >
+                                <Day>{item.date}</Day>
+                                <Item>{item.description}</Item>
+                                <Value type={item.type}>{item.value}</Value>
+                            </DescriptionContainer>
+                        ))}
+
 
                         <TotalContainer>
-                            {userComing}
+                            {userWallet.balance}
                         </TotalContainer>
                     </>
                 )
