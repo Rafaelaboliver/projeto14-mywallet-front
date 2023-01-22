@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Bottom, CheckIn, CheckOut, DataContainer, HomeContainer, Title, DescriptionContainer, Day, Item, Value, TotalContainer } from "./HomePageCss";
+import { Bottom, CheckIn, CheckOut, DataContainer, HomeContainer, Title, DescriptionContainer, Day, Item, Value, TotalContainer, InitialMessage } from "./HomePageCss";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { apiWallet } from "../../services/apiWallet";
@@ -32,7 +32,7 @@ export default function HomePage() {
     return (
         <HomeContainer>
             <Title>
-                <h1>Olá, Fulano</h1>
+                <h1>Olá, {userWallet.name}</h1>
                 <Link to='/'>
                     <ion-icon name="log-out-outline"></ion-icon>
                 </Link>
@@ -41,9 +41,9 @@ export default function HomePage() {
 
             <DataContainer>
                 {userWallet.coming.length === 0 ? (
-                    <p>
-                        Não há registros de entrada ou saída
-                    </p>
+                    <InitialMessage>
+                        <p>Não há registros de entrada ou saída</p>
+                    </InitialMessage>
                 ) : (
                     //aqui iriei fazer o map da variável initialMessage (setInitialMessage vai receber os dados do servidor):
                     <>
@@ -56,9 +56,11 @@ export default function HomePage() {
                             </DescriptionContainer>
                         ))}
 
-
-                        <TotalContainer>
-                            {userWallet.balance}
+                        <TotalContainer balance={Number(userWallet.balance)}>
+                            <h3>SALDO</h3>
+                            <p >
+                                {userWallet.balance}
+                            </p>
                         </TotalContainer>
                     </>
                 )

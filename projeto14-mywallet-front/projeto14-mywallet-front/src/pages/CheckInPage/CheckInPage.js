@@ -1,13 +1,31 @@
 import { CheckInContainer, DataContainer, Title } from './CheckInPageCss'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
+import { apiWallet } from '../../services/apiWallet';
 
 export default function CheckInPage() {
-    const [valor, setValor] = useState('');
-    const [descricao, setDescricao] = useState('');
-    
 
-    function handleCheckIn (e) {
+    const [form, setForm] = useState({ value: "", description: "" });
+    const navigate = useNavigate();
+    const { user } = useContext(UserContext);
+
+    function editForm(e) {
+        setForm({ ...form, [e.target.id]: e.target.value });
+    }
+
+    function handleCheckIn(e) {
         e.preventDefault();
+        const body = { ...form, type: "in" };
+        apiWallet
+            .addComingWallet(user.token, body)
+            .then((res) => {
+                console.log(res.data);
+                navigate("/home");
+            })
+            .catch((err) => {
+                console.log(err.response.data);
+            });
     }
 
     return (
@@ -18,23 +36,23 @@ export default function CheckInPage() {
             <DataContainer>
                 <form onSubmit={handleCheckIn}>
                     <input
-                        id='valor'
-                        type='text'
-                        value={valor}
+                        id='value'
+                        type='number'
+                        value={form.value}
                         placeholder='Valor'
-                        onChange={e => setValor(e.target.value)}
+                        step='0.01'
+                        onChange={editForm}
                         required
                     />
 
                     <input
-                        id='descricao'
-                        type='descricao'
-                        value={descricao}
+                        id='description'
+                        type='text'
+                        value={form.description}
                         placeholder='Descrição'
-                        onChange={e => setDescricao(e.target.value)}
+                        onChange={editForm}
                         required
                     />
-
                     <button type='submit'>Salvar entrada</button>
                 </form>
             </DataContainer>

@@ -14,6 +14,12 @@ function getWallet(token) {
   return axios.get(`${BASE_URL}/wallet`, createConfig(token));
 }
 
+function addComingWallet(token, body) {
+  return axios.post(`${BASE_URL}/wallet`, body, createConfig(token));
+}
+
 export const apiWallet = {
-  getWallet
+  getWallet,
+  addComingWallet
 };
+

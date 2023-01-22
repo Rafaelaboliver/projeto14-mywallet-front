@@ -44,11 +44,19 @@ align-items: center;
 margin: 22px auto 0px;
 background-color: #FFF;
 border-radius: 5px;
+justify-content: space-between;
+scrollable: true;
+overflow-y: auto;
+
+`
+export const InitialMessage = styled.div`
 text-align: center;
 justify-content: center;
-
+margin: auto;
+display: flex;
+width: 180px;
+height: 46px;
 p{
-    width: 200px;
     font-family: "Raleway";
     font-style: normal;
     font-weight: 400;
@@ -57,6 +65,7 @@ p{
     color: #868686;
 }
 `
+
 export const Bottom = styled.div`
 display: flex; 
 align-items: center;
@@ -144,12 +153,13 @@ ion-icon{
     margin-left: 10px;
 }
 `
-export  const DescriptionContainer = styled.div`
+export const DescriptionContainer = styled.li`
 width: 326px;
 display: flex;
 flex-direction: raw;
 justify-content: space-between;
-padding: 20px 15px 0px;
+margin-top: 15px;
+padding: 0pc 15px 0px;
 `
 
 export const Day = styled.div`
@@ -174,7 +184,7 @@ p{
 }
 `
 export const Value = styled.div`
-color: ${(props) => (props.type === "in" ? '#03AC00': '#C70000')};
+color: ${(props) => (props.type === "in" ? '#03AC00' : '#C70000')};
 p{
     font-family: "Raleway";
     font-style: normal;
@@ -186,7 +196,27 @@ p{
 export const TotalContainer = styled.div`
 width: 326px;
 display: flex;
-flex-direction: raw;
-text-align: center;
-justify-content: center;
+flex-direction: row;
+justify-content: space-between;
+margin-bottom: 2px;
+padding: 0pc 15px 0px;
+background-color: #fff;
+position: sticky;
+bottom: 0;
+z-index: 1;
+
+p{
+    color: ${(props) => (props.balance > 0 ? '#03AC00' : '#C70000')};
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+}
+
+
+h3{
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 700;
+    background-color: #fff;
+}
 `
