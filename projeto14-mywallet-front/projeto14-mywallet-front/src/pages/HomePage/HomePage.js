@@ -5,8 +5,6 @@ import { UserContext } from "../../context/UserContext";
 import { apiWallet } from "../../services/apiWallet";
 import apiAuth from "../../services/apiAuth";
 
-
-
 export default function HomePage() {
     const { user } = useContext(UserContext);
     const [userWallet, setUserWallet] = useState({
