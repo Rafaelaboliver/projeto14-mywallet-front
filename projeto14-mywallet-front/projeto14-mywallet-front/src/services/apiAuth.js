@@ -12,9 +12,14 @@ function singIn(body) {
   
   }
 
+  function singOut(token) {
+    return axios.post(`${BASE_URL}/singOut`, { token });
+  }
+
   const apiAuth = {
     singUp, 
-    singIn
+    singIn,
+    singOut
   };
 export default apiAuth;
 

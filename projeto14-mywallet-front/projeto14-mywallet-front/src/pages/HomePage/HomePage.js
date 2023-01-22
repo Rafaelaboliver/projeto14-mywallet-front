@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Bottom, CheckIn, CheckOut, DataContainer, HomeContainer, Title, DescriptionContainer, Day, Item, Value, TotalContainer, InitialMessage } from "./HomePageCss";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { apiWallet } from "../../services/apiWallet";
+import apiAuth from "../../services/apiAuth";
+
 
 
 export default function HomePage() {
@@ -11,6 +13,8 @@ export default function HomePage() {
         coming: [],
         balance: 0,
     });
+    const navigate = useNavigate();
+
 
     function getWalletList() {
         apiWallet
@@ -27,14 +31,21 @@ export default function HomePage() {
     useEffect(getWalletList, [user.token]);
     console.log(userWallet.coming);
 
+    function singOut() {
+        apiAuth.singOut(user.token).then((res) => {
+          console.log("Resposta do Servidor:", res.data);
+          navigate("/");
+        });
+      }
+
     //let userComing = userWallet.coming;
 
     return (
         <HomeContainer>
             <Title>
                 <h1>Olá, {userWallet.name}</h1>
-                <Link to='/'>
-                    <ion-icon name="log-out-outline"></ion-icon>
+                <Link onClick={singOut}>
+                    <ion-icon name="log-out-outline" ></ion-icon>
                 </Link>
 
             </Title>
